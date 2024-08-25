@@ -4,15 +4,18 @@ import { UserContext } from "../../context/UserContest/UserContext";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import logo from "./../../assets/freshcart-logo.svg";
+import { cartContext } from "../../context/UserContest/CartContext";
 export default function Navbar() {
-  let { token, setToken } = useContext(UserContext);
+  let { token, setToken, setNameOfUser, NameOfUser } = useContext(UserContext);
+  let { numbOfCarts } = useContext(cartContext);
   let navigate = useNavigate();
   function logOut() {
+    localStorage.removeItem("userName");
     localStorage.removeItem("user token");
+    setNameOfUser(null);
     setToken(null);
     navigate("/login");
   }
-
   let [toggle, setToggle] = useState(false);
   function handleToggle() {
     setToggle(!toggle);
@@ -20,8 +23,8 @@ export default function Navbar() {
   return (
     <nav className=" bg-slate-100 py-4 fixed top-0 right-0 left-0 z-50">
       <div className="container">
-        <div className="row tablet:items-center flex-col   tablet:flex-row">
-          <div className="  flex justify-between  ">
+        <div className="row tablet:items-center  justify-center flex-col   tablet:flex-row">
+          <div className="  flex justify-between    tablet:pb-1">
             <Link to={""}>
               <img src={logo} alt="" />
             </Link>
@@ -47,6 +50,9 @@ export default function Navbar() {
                   </li>
                   <li className=" mx-2 text-slate-600">
                     <NavLink to={"cart"}>Cart</NavLink>
+                  </li>
+                  <li className=" mx-2 text-slate-600">
+                    <NavLink to={"wishList"}>wish list</NavLink>
                   </li>
                   <li className=" mx-2 text-slate-600">
                     <NavLink to={"products"}>Products</NavLink>
@@ -95,6 +101,24 @@ export default function Navbar() {
                   </li>
                 </>
               )}
+              <li>
+                {NameOfUser && (
+                  <Link
+                    className=" text-green-500  font-bold mx-3  hover:text-green-800"
+                    to={"cart"}
+                  >
+                    {NameOfUser}
+                    <div className=" relative inline">
+                      <i className="fa-solid fa-cart-shopping relative  text-2xl"></i>
+                      {numbOfCarts !== 0 && (
+                        <span className=" absolute  text-white w-5 h-5 bg-black rounded-full -top-3 left-3 flex justify-center items-center">
+                          {numbOfCarts}
+                        </span>
+                      )}
+                    </div>
+                  </Link>
+                )}
+              </li>
             </ul>
           </div>
         </div>

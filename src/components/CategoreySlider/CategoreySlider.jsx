@@ -10,9 +10,7 @@ export default function CategoreySlider() {
       .then((data) => {
         setProducts(data.data.data);
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => error);
   }
   useEffect(() => {
     getCategory();
@@ -53,7 +51,7 @@ export default function CategoreySlider() {
     ],
   };
   return (
-    <div>
+    <div className=" my-6">
       <h2 className=" text-xl my-5">Shop Popular Category</h2>
       <Slider {...settings}>
         {products.map((product) => (

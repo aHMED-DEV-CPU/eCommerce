@@ -5,43 +5,28 @@ import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Helmet } from "react-helmet";
+
 export default function Register() {
   let navigate = useNavigate();
-  // function validateAllInputs(values) {
-  //   let errors = {};
-  //   if (!values.name) {
-  //     errors.name = "Name is required";
-  //   } else if (!/^[A-Z][a-zA-Z]{2,8}$/.test(values.name)) {
-  //     errors.name = "Name should starts with capital letter";
-  //   }
-  //   if (!values.email) {
-  //     errors.email = "email is required";
-  //   } else if (!/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/.test(values.email)) {
-  //     errors.email = "email should be valid";
-  //   }
-  //   if (!values.password) {
-  //     errors.password = "password is required";
-  //   } else if (!/^[a-zA-Z0-9]{6,15}$/.test(values.password)) {
-  //     errors.password = "password  should be at least 6 char";
-  //   }
-  //   if (!values.rePassword) {
-  //     errors.rePassword = "rePassword is required";
-  //   } else if (values.rePassword !== values.password) {
-  //     errors.rePassword = "rePassword is not valid";
-  //   }
-  //   if (!values.phone) {
-  //     errors.phone = "phone is required";
-  //   } else if (!/^01[0-25][0-9]{8}$/.test()) {
-  //     errors.phone = "phone is not valid";
-  //   }
-  //   return errors;
-  // }
+
   let validationSchema = Yup.object().shape({
-    name: Yup.string().min(3).max(9).required(),
+    name: Yup.string()
+      .min(3, "at least 3 chars")
+      .max(12, "not more than  12 chars")
+      .required(),
     email: Yup.string().email().required(),
     password: Yup.string()
       .required()
-      .matches(/^[a-zA-Z0-9]{6,15}$/, "password is not valid"),
+      .matches(
+        /^[A-Za-z][A-Za-z0-9]{5,8}$/gm,
+        `must be
+        <br>
+* Start with a letter (either uppercase or lowercase).
+<br>
+* Be between 6 and 9 characters in total.
+<br>
+* Can only contain letters (A-Z or a-z) and numbers (0-9)`
+      ),
     rePassword: Yup.string()
       .required()
       .oneOf([Yup.ref("password")], "not valid"),
@@ -60,12 +45,10 @@ export default function Register() {
           setIsLoading(false);
           navigate("/login");
         }
-        console.log(data);
       })
       .catch((error) => {
         setError(error.response.data.message);
         setIsLoading(false);
-        console.log(error.response.data.message);
       });
   }
 
@@ -111,7 +94,9 @@ export default function Register() {
             name address
           </label>
           {formik.errors.name && formik.touched.name && (
-            <span className=" text-red-500 mt-3">{formik.errors.name}</span>
+            <div className="text-red-700 mt-3 bg-red-100 block p-3 border border-red-700 rounded">
+              {formik.errors.name}
+            </div>
           )}
         </div>
         <div className="relative z-0 w-full mb-5 group">
@@ -133,7 +118,9 @@ export default function Register() {
             Email address
           </label>
           {formik.errors.email && formik.touched.email && (
-            <span className=" text-red-500 mt-3">{formik.errors.email}</span>
+            <div className="text-red-700 mt-3 bg-red-100 block p-3 border border-red-700 rounded">
+              {formik.errors.email}
+            </div>
           )}
         </div>
         <div className="relative z-0 w-full mb-5 group">
@@ -155,7 +142,10 @@ export default function Register() {
             Password
           </label>
           {formik.errors.password && formik.touched.password && (
-            <span className=" text-red-500 mt-3">{formik.errors.password}</span>
+            <div
+              className="text-red-700 mt-3 bg-red-100 block p-3 border border-red-700 rounded"
+              dangerouslySetInnerHTML={{ __html: formik.errors.password }}
+            />
           )}
         </div>
         <div className="relative z-0 w-full mb-5 group">
@@ -177,9 +167,9 @@ export default function Register() {
             Confirm password
           </label>
           {formik.errors.rePassword && formik.touched.rePassword && (
-            <span className=" text-red-500 mt-3">
+            <div className="text-red-700 mt-3 bg-red-100 block p-3 border border-red-700 rounded">
               {formik.errors.rePassword}
-            </span>
+            </div>
           )}
         </div>
         <div className="relative z-0 w-full mb-5 group">
@@ -201,13 +191,16 @@ export default function Register() {
             phone
           </label>
           {formik.errors.phone && formik.touched.phone && (
-            <span className=" text-red-500 mt-3">{formik.errors.phone}</span>
+            <div className="text-red-700 mt-3 bg-red-100 block p-3 border border-red-700 rounded">
+              {formik.errors.phone}
+            </div>
           )}
         </div>
 
         <button
           type="submit"
-          className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+          className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 border disabled:cursor-not-allowed   disabled:bg-white  disabled:text-green-950 disabled:border-green-950 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+          disabled={!(formik.isValid && formik.dirty)}
         >
           {isLoading ? <div className="loader"></div> : "submit"}
         </button>

@@ -22,8 +22,8 @@ var settings = {
 export default function MainSlider() {
   return (
     <div>
-      <div className="flex">
-        <div className="  w-3/4 ">
+      <div className="flex my-5 pt-3">
+        <div className=" w-full  md:w-3/4 ">
           <Slider {...settings}>
             {" "}
             {images.map((image, i) => (
@@ -31,7 +31,7 @@ export default function MainSlider() {
             ))}
           </Slider>
         </div>
-        <div className=" w1/4">
+        <div className=" hidden md:w1/4 md:block">
           <img src={image1} alt="" className=" h-[200px]" />
           <img src={image2} alt="" className=" h-[200px]" />
         </div>
