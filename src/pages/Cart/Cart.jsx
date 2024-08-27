@@ -15,7 +15,6 @@ export default function Cart() {
       let { data } = await getLogged();
       setNumbOfCarts(data?.numOfCartItems);
       setAllProducts(data?.data);
-      console.log(data?.data);
     } catch (error) {
       console.log(error);
     } finally {

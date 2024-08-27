@@ -30,7 +30,6 @@ export default function Categories() {
         `https://ecommerce.routemisr.com/api/v1/categories/${categoryId}/subcategories`
       );
       setSubCat(response.data.data);
-      console.log(response.data.data);
     } catch (error) {
       console.error("Error fetching subcategories:", error);
     } finally {

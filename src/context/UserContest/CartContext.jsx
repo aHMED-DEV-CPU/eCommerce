@@ -46,9 +46,9 @@ export default function CartContextProvider(props) {
       .then((data) => {
         setCartId(data?.data?.cartId);
         setUserId(data?.data?.data?.cartOwner);
-        localStorage.setItem("userId", data?.data?.data?.cartOwner);
-        console.log(data?.data?.data?.cartOwner);
-        console.log(data?.data?.cartId);
+        if (data?.data?.data?.cartOwner) {
+          localStorage.setItem("userId", data?.data?.data?.cartOwner);
+        }
 
         return data;
       })

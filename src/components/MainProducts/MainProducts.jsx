@@ -33,7 +33,7 @@ export default function MainProducts() {
   }
   useEffect(() => {
     getNumberOfCarts();
-  }, []);
+}, []);
 
   //add to cart and the message
   async function handleAddToCart(productId) {
