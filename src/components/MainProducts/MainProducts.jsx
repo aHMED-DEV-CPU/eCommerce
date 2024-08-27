@@ -8,21 +8,10 @@ import toast from "react-hot-toast";
 import Pagination from "../Pagination/Pagination";
 import { WishListContext } from "../../context/UserContest/WishListContext";
 export default function MainProducts() {
-  let { AddToCart, setNumbOfCarts } = useContext(cartContext);
+  let { AddToCart, setNumbOfCarts, getLogged } = useContext(cartContext);
   const [data, setData] = useState(null);
   let [loading, setLoading] = useState(false);
   let [productsOfSearch, setProductsOfSearch] = useState([]);
-
-  let { addToWisList, getLoggedWishList } = useContext(WishListContext);
-  let [loggedWish, setLoggedWish] = useState([]);
-  async function handleLoggedWishList() {
-    try {
-      const { data } = await getLoggedWishList();
-      setLoggedWish(data?.data);
-    } catch (error) {
-      console.error("Error fetching wishlist:", error);
-    }
-  }
 
   //pagination
   function getProducts(pageNum = 1) {
@@ -36,16 +25,22 @@ export default function MainProducts() {
   useEffect(() => {
     getProducts();
   }, []);
+  async function getNumberOfCarts() {
+    let { data } = await getLogged();
+    // if (data.numOfCartItems) {
+    setNumbOfCarts(data.numOfCartItems);
+    // }
+  }
   useEffect(() => {
-    handleLoggedWishList();
-  }, [loggedWish]);
+    getNumberOfCarts();
+  }, []);
 
   //add to cart and the message
   async function handleAddToCart(productId) {
     setLoading(true);
     try {
       let { data } = await AddToCart(productId);
-      console.log(productId);
+
       setNumbOfCarts(data?.numOfCartItems);
       toast(data?.message, {
         duration: 2000,
@@ -79,7 +74,24 @@ export default function MainProducts() {
       setLoading(false);
     }
   }
-  //add to wishList
+
+  // add to wishList
+
+  let { addToWisList, getLoggedWishList } = useContext(WishListContext);
+  let [loggedWish, setLoggedWish] = useState([]);
+  async function handleLoggedWishList() {
+    try {
+      const { data } = await getLoggedWishList();
+
+      setLoggedWish(data?.data);
+    } catch (error) {
+      console.error("Error fetching wishlist:", error);
+    }
+  }
+
+  useEffect(() => {
+    handleLoggedWishList();
+  }, [loggedWish]);
 
   async function handleAddTOWishList(id) {
     setLoading(true);
@@ -202,7 +214,7 @@ export default function MainProducts() {
                   </Link>
                   <div className=" flex justify-end">
                     <button
-                      className={`fa-solid fa-heart   text-3xl mt-2 mr-3 ${
+                      className={`fa-solid fa-heart   text-3xl mt-2 mr-3  ${
                         isInWishlist(product?.id) && "text-red-600"
                       } `}
                       onClick={() => handleAddTOWishList(product?.id)}

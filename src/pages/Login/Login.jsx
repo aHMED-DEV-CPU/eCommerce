@@ -50,11 +50,8 @@ export default function Login() {
 
   let formik = useFormik({
     initialValues: {
-      name: "",
       email: "",
       password: "",
-      rePassword: "",
-      phone: "",
     },
     validationSchema,
     onSubmit: handleLogin,
@@ -86,7 +83,7 @@ export default function Login() {
           />
           <label
             htmlFor="floating_email"
-            className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-green-900 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-green-900  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
           >
             Email address
           </label>
@@ -109,7 +106,7 @@ export default function Login() {
           />
           <label
             htmlFor="floating_password"
-            className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-green-900 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-green-900  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
           >
             Password
           </label>
@@ -123,13 +120,13 @@ export default function Login() {
         <div className=" flex justify-between ">
           <Link
             to={"/forgetPassword"}
-            className=" text-xl font-bold hover:text-green-600"
+            className=" text-xl font-bold hover:text-green-600 dark:text-white  dark:hover:text-green-600"
           >
             forget your password ?
           </Link>
           <button
             type="submit"
-            className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg  py-2 px-4 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 border disabled:cursor-not-allowed   disabled:bg-white  disabled:text-green-950 disabled:border-green-950"
+            className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg  py-2 px-4 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 border disabled:cursor-not-allowed   disabled:bg-white  disabled:text-green-950 disabled:border-green-950 dark:text-white"
             disabled={!(formik.isValid && formik.dirty)}
           >
             {isLoading ? <div className="loader"></div> : "login now"}

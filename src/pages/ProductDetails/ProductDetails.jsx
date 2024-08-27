@@ -79,10 +79,14 @@ export default function ProductDetails() {
           </Slider>
         </div>
         <div className=" w-full  md:w-3/4  p-2">
-          <h2 className=" text-xl my-2">{details.title}</h2>
-          <small className=" text-slate-400 ">{details.description}</small>
-          <h6 className=" my-2">{details?.category?.name}</h6>
-          <div className=" flex justify-between">
+          <h2 className=" text-xl my-2 dark:text-slate-200">{details.title}</h2>
+          <small className=" text-slate-400  dark:text-slate-100 ">
+            {details.description}
+          </small>
+          <h6 className=" my-2 dark:text-slate-200">
+            {details?.category?.name}
+          </h6>
+          <div className=" flex justify-between dark:text-slate-200">
             <span>{details?.price}EGP</span>
             <span>
               <i className="fa-solid fa-star text-yellow-400"></i>

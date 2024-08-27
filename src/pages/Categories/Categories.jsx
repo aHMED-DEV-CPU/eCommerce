@@ -87,7 +87,7 @@ export default function Categories() {
                       className="w-full sm:w-1/2 lg:w-1/3 p-4"
                     >
                       <div
-                        className={`border p-4 text-2xl text-center font-bold rounded ${style.boxShadow} duration-300`}
+                        className={`border p-4 text-2xl text-center font-bold rounded ${style.boxShadow} duration-300 dark:text-white`}
                       >
                         {subCategory.name}
                       </div>

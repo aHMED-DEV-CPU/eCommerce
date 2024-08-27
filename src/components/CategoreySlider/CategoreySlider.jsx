@@ -52,10 +52,12 @@ export default function CategoreySlider() {
   };
   return (
     <div className=" my-6">
-      <h2 className=" text-xl my-5">Shop Popular Category</h2>
+      <h2 className=" text-xl my-5 dark:text-slate-200">
+        Shop Popular Category
+      </h2>
       <Slider {...settings}>
         {products.map((product) => (
-          <div className="  text-center" key={product._id}>
+          <div className="  text-center dark:text-slate-200" key={product._id}>
             <img
               src={product?.image}
               alt={product.name}

@@ -1,10 +1,9 @@
-import { Helmet } from "react-helmet";
-
 import axios from "axios";
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
 
-export default function ForgetPassword() {
+export default function Verify() {
   let [inputValue, setInputValue] = useState("");
   let [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -14,36 +13,35 @@ export default function ForgetPassword() {
     setInputValue(newVal);
     console.log(inputValue);
   }
-  function handleEmail() {
+  function handleVerify() {
     setIsLoading(true);
     axios
-      .post("https://ecommerce.routemisr.com/api/v1/auth/forgotPasswords", {
-        email: inputValue,
+      .post("https://ecommerce.routemisr.com/api/v1/auth/verifyResetCode", {
+        resetCode: inputValue,
       })
       .then((data) => {
         console.log(data);
-        if (data?.data?.statusMsg === "success") {
+        if (data?.data?.status === "Success") {
           setIsLoading(false);
-          navigate("/verify");
+          navigate("/change-password");
         }
       })
       .catch((error) => {
-        setError(error.response.data.message);
         setIsLoading(false);
+        setError(error.response.data.message);
       });
   }
-
   return (
     <>
       <Helmet>
-        <title>forget-password</title>
+        <title>verify</title>
       </Helmet>
       <div className="  pt-5">
         <label
           htmlFor="first_name"
           className="block mb-2  font-medium text-green-500 dark:text-white text-2xl"
         >
-          Enter Your Email
+          verification code
         </label>
         <input
           type="email"
@@ -57,10 +55,10 @@ export default function ForgetPassword() {
         <button
           type="button"
           className="focus:outline-none border disabled:cursor-not-allowed   disabled:bg-white  disabled:text-green-950 disabled:border-green-950 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 mt-5"
-          onClick={() => handleEmail()}
+          onClick={() => handleVerify()}
           disabled={inputValue.length === 0}
         >
-          {isLoading ? <div className="loader"></div> : "submit"}
+          {isLoading ? <div className="loader"></div> : "verify"}
         </button>
       </div>
       {error && (

@@ -5,8 +5,13 @@
     @apply flex flex-wrap
 }
 .active {
-    @apply text-green-600
+    @apply text-green-500  
 }
+
+*{
+    @apply transition-colors duration-300
+}
+
 .sheight {
     min-height: calc(100vh - 72px );
 }

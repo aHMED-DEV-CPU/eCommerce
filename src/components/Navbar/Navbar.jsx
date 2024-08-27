@@ -7,11 +7,14 @@ import logo from "./../../assets/freshcart-logo.svg";
 import { cartContext } from "../../context/UserContest/CartContext";
 export default function Navbar() {
   let { token, setToken, setNameOfUser, NameOfUser } = useContext(UserContext);
-  let { numbOfCarts } = useContext(cartContext);
+
+  let { numbOfCarts, setNumbOfCarts } = useContext(cartContext);
   let navigate = useNavigate();
   function logOut() {
     localStorage.removeItem("userName");
     localStorage.removeItem("user token");
+    localStorage.removeItem("userId");
+    setNumbOfCarts(0);
     setNameOfUser(null);
     setToken(null);
     navigate("/login");
@@ -21,19 +24,17 @@ export default function Navbar() {
     setToggle(!toggle);
   }
   return (
-    <nav className=" bg-slate-100 py-4 fixed top-0 right-0 left-0 z-50">
+    <nav
+      className={` bg-slate-100 py-6 fixed top-0 right-0 left-0 z-50 dark:bg-slate-900  dark:text-white`}
+    >
       <div className="container">
         <div className="row tablet:items-center  justify-center flex-col   tablet:flex-row">
           <div className="  flex justify-between    tablet:pb-1">
             <Link to={""}>
               <img src={logo} alt="" />
             </Link>
-            <button onClick={handleToggle}>
-              <img
-                src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2833, 37, 41, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e"
-                alt=""
-                className="  w-10 tablet:hidden"
-              />
+            <button onClick={handleToggle} className="w-10 tablet:hidden">
+              <i className="fa-solid fa-sliders text-2xl "></i>
             </button>
           </div>
           <div
@@ -41,27 +42,63 @@ export default function Navbar() {
               toggle ? "flex-col tablet:flex-row" : "hidden tablet:flex"
             }`}
           >
-            <ul className=" flex  flex-col   tablet:flex-row">
+            <ul className=" flex  flex-col   tablet:flex-row  dark:text-slate-200">
               {token && (
                 <>
                   {" "}
-                  <li className=" mx-2 tablet:ms-4 text-slate-600">
-                    <NavLink to={""}>Home</NavLink>
+                  <li className=" mx-2 tablet:ms-4  ">
+                    <NavLink
+                      onClick={handleToggle}
+                      to={""}
+                      className=" text-slate-500  hover:text-green-400"
+                    >
+                      Home
+                    </NavLink>
                   </li>
-                  <li className=" mx-2 text-slate-600">
-                    <NavLink to={"cart"}>Cart</NavLink>
+                  <li className=" mx-2 ">
+                    <NavLink
+                      onClick={handleToggle}
+                      to={"cart"}
+                      className="text-slate-500 hover:text-green-400"
+                    >
+                      Cart
+                    </NavLink>
                   </li>
-                  <li className=" mx-2 text-slate-600">
-                    <NavLink to={"wishList"}>wish list</NavLink>
+                  <li className=" mx-2 ">
+                    <NavLink
+                      onClick={handleToggle}
+                      to={"wishList"}
+                      className="text-slate-500 hover:text-green-400"
+                    >
+                      wish list
+                    </NavLink>
                   </li>
-                  <li className=" mx-2 text-slate-600">
-                    <NavLink to={"products"}>Products</NavLink>
+                  <li className=" mx-2 ">
+                    <NavLink
+                      onClick={handleToggle}
+                      to={"products"}
+                      className="text-slate-500 hover:text-green-400"
+                    >
+                      Products
+                    </NavLink>
                   </li>
-                  <li className=" mx-2 text-slate-600">
-                    <NavLink to={"categories"}>Categories</NavLink>
+                  <li className=" mx-2 ">
+                    <NavLink
+                      onClick={handleToggle}
+                      to={"categories"}
+                      className="text-slate-500 hover:text-green-400"
+                    >
+                      Categories
+                    </NavLink>
                   </li>
-                  <li className=" mx-2 text-slate-600">
-                    <NavLink to={"brands"}>Brands</NavLink>
+                  <li className=" mx-2 ">
+                    <NavLink
+                      onClick={handleToggle}
+                      to={"brands"}
+                      className="text-slate-500 hover:text-green-400"
+                    >
+                      Brands
+                    </NavLink>
                   </li>
                 </>
               )}
@@ -87,25 +124,41 @@ export default function Navbar() {
               </li>
 
               {token ? (
-                <button className="text-slate-600" onClick={logOut}>
+                <button
+                  className="text-slate-500 hover:text-green-400"
+                  onClick={logOut}
+                >
                   Logout
                 </button>
               ) : (
                 <>
                   {" "}
-                  <li className=" mx-2 text-slate-600">
-                    <NavLink to={"Login"}>Login</NavLink>
+                  <li className=" mx-2 ">
+                    <NavLink
+                      onClick={handleToggle}
+                      to={"Login"}
+                      className="text-slate-500 hover:text-green-400"
+                    >
+                      Login
+                    </NavLink>
                   </li>
-                  <li className=" mx-2 text-slate-600">
-                    <NavLink to={"Register"}>Register</NavLink>
+                  <li className=" mx-2 ">
+                    <NavLink
+                      onClick={handleToggle}
+                      to={"Register"}
+                      className="text-slate-500 hover:text-green-400"
+                    >
+                      Register
+                    </NavLink>
                   </li>
                 </>
               )}
               <li>
                 {NameOfUser && (
                   <Link
-                    className=" text-green-500  font-bold mx-3  hover:text-green-800"
+                    className=" text-green-500   font-bold mx-3  hover:text-green-800 dark:hover:text-green-400"
                     to={"cart"}
+                    onClick={handleToggle}
                   >
                     {NameOfUser}
                     <div className=" relative inline">

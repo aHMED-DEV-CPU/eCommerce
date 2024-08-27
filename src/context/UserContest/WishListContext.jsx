@@ -3,10 +3,13 @@ import React, { createContext } from "react";
 
 export let WishListContext = createContext();
 export default function WishListContextProvider(props) {
-  let headers = {
-    token: localStorage.getItem("user token"),
-  };
+  // let headers = {
+  //   token: localStorage.getItem("user token"),
+  // };
   function addToWisList(productId) {
+    let headers = {
+      token: localStorage.getItem("user token"),
+    };
     return axios
       .post(
         "https://ecommerce.routemisr.com/api/v1/wishlist",
@@ -21,14 +24,20 @@ export default function WishListContextProvider(props) {
       .catch((error) => error);
   }
   function getLoggedWishList() {
+    let headers = {
+      token: localStorage.getItem("user token"),
+    };
     return axios
       .get("https://ecommerce.routemisr.com/api/v1/wishlist", {
         headers,
       })
       .then((data) => data)
-      .catch((error) => error);
+      .catch((error) => console.log(error));
   }
   function removeProductFromWishList(id) {
+    let headers = {
+      token: localStorage.getItem("user token"),
+    };
     return axios
       .delete(`https://ecommerce.routemisr.com/api/v1/wishlist/${id}`, {
         headers,

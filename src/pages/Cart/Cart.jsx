@@ -13,6 +13,7 @@ export default function Cart() {
     setLoading(true);
     try {
       let { data } = await getLogged();
+      setNumbOfCarts(data?.numOfCartItems);
       setAllProducts(data?.data);
       console.log(data?.data);
     } catch (error) {
@@ -74,13 +75,15 @@ export default function Cart() {
         <title>Cart</title>
       </Helmet>
 
-      <div className="relative shadow-md rounded-lg w-5/6 mx-auto p-12 bg-[#f8f9fa]">
+      <div className="relative shadow-md rounded-lg w-5/6 mx-auto p-12 bg-[#f8f9fa] dark:bg-white/70">
         <div className="w-full">
           <div className=" flex justify-between items-center  mb-4 ">
-            <h2 className="  text-xl md:text-3xl font-bold">Cart Shop</h2>
+            <h2 className="  text-xl md:text-3xl font-bold dark:text-white">
+              Cart Shop
+            </h2>
             {allProducts?.products && (
               <Link
-                className=" bg-blue-500 hover:bg-blue-700 text-white py-3 rounded px-2 md:text-xl hover:text-green-400"
+                className=" bg-blue-500 hover:bg-blue-700 text-white py-3 rounded px-2 md:text-xl hover:text-green-400 "
                 to={"/checkOut"}
               >
                 check out
@@ -90,13 +93,17 @@ export default function Cart() {
           {allProducts?.products && (
             <div className=" flex justify-between ">
               <h3>
-                <span className="md:text-2xl  ">total price:</span>
-                <span className=" text-green-500  inline-block ms-2 md:text-2xl">
+                <span className="md:text-2xl  dark:text-white ">
+                  total price:
+                </span>
+                <span className=" text-green-500  inline-block ms-2 md:text-2xl ">
                   {allProducts?.totalCartPrice}
                 </span>
               </h3>
               <h3>
-                <span className="md:text-2xl  ">total number of items:</span>
+                <span className="md:text-2xl dark:text-white  ">
+                  total number of items:
+                </span>
                 <span className=" text-green-500  inline-block ms-2 md:text-2xl">
                   {allProducts?.products?.length}
                 </span>
@@ -121,13 +128,15 @@ export default function Cart() {
                   </div>
                   <div className=" flex justify-between grow md:ps-4 items-center">
                     <div>
-                      <h5 className=" my-2 md:text-xl ">
+                      <h5 className=" my-2 md:text-xl dark:text-white ">
                         {product?.product?.title
                           ?.split(" ")
                           .slice(0, 3)
                           .join(" ")}
                       </h5>
-                      <h6 className=" my-2">{product?.price} EGP</h6>
+                      <h6 className=" my-2 dark:text-green-500">
+                        {product?.price} EGP
+                      </h6>
                       <button
                         className="text-red-600 "
                         onClick={() => deleteItem(product?.product?.id)}
@@ -138,7 +147,7 @@ export default function Cart() {
                     </div>
                     <div className=" flex">
                       <button
-                        className="fa-solid fa-plus border border-green-600 rounded p-2 text-xs curse-cursor-pointer"
+                        className="fa-solid fa-plus border border-green-600 rounded p-2 text-xs curse-cursor-pointer dark:text-white"
                         onClick={() => {
                           updatingQuantity(
                             product?.product?.id,
@@ -147,11 +156,11 @@ export default function Cart() {
                         }}
                       ></button>
 
-                      <span className=" inline-block   mx-1 md:mx-4">
+                      <span className=" inline-block   mx-1 md:mx-4 dark:text-white">
                         {product?.count}
                       </span>
                       <button
-                        className="fa-solid fa-minus border border-green-600 rounded p-2 text-xs curse-cursor-pointer"
+                        className="fa-solid fa-minus border border-green-600 rounded p-2 text-xs curse-cursor-pointer dark:text-white"
                         onClick={() => {
                           if (product?.count == 1) {
                             deleteItem(product?.product?.id);

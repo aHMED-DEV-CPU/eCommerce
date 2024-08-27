@@ -1,9 +1,5 @@
 import "./App.css";
-import {
-  createBrowserRouter,
-  createHashRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Offline } from "react-detect-offline";
 import Home from "./pages/Home/Home";
 import { Toaster } from "react-hot-toast";
@@ -26,6 +22,8 @@ import WishList from "./pages/WishList/WishList";
 import Checkout from "./pages/Checkout/Checkout";
 import AllOrders from "./pages/AllOrders/AllOrders";
 import WishListContextProvider from "./context/UserContest/WishListContext";
+import Verify from "./pages/Verify/Verify";
+import ChangePassword from "./pages/ChangePassword/ChangePassword";
 
 let query = new QueryClient();
 function App() {
@@ -104,6 +102,14 @@ function App() {
           element: <ForgetPassword />,
         },
         {
+          path: "verify",
+          element: <Verify />,
+        },
+        {
+          path: "change-password",
+          element: <ChangePassword />,
+        },
+        {
           path: "allorders",
           element: (
             <Protected>
@@ -121,8 +127,8 @@ function App() {
   return (
     <QueryClientProvider client={query}>
       <UserContextProvider>
-        <WishListContextProvider>
-          <CartContextProvider>
+        <CartContextProvider>
+          <WishListContextProvider>
             <Offline>
               <div className="  fixed bottom-1 right-3 z-50 bg-red-600 p-4 rounded text-white hover:bg-red-950 duration-700 ">
                 You Are Offline
@@ -131,8 +137,8 @@ function App() {
             <Toaster />
             <RouterProvider router={routes}></RouterProvider>
             <ReactQueryDevtools />
-          </CartContextProvider>
-        </WishListContextProvider>
+          </WishListContextProvider>
+        </CartContextProvider>
       </UserContextProvider>
     </QueryClientProvider>
   );

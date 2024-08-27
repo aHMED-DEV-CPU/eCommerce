@@ -52,7 +52,9 @@ export default function Brands() {
                       {" "}
                       <img src={brand.image} alt="" />
                     </div>
-                    <h5 className=" text-center p-4 mb-4">{brand.name}</h5>
+                    <h5 className=" text-center p-4 mb-4 dark:text-white">
+                      {brand.name}
+                    </h5>
                   </button>
                 </div>
               </>
