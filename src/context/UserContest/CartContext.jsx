@@ -130,7 +130,7 @@ export default function CartContextProvider(props) {
       .post(
         `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}`,
         { shippingAddress },
-        { headers, params: { url: "http://localhost:5173" } }
+        { headers, params: { url: "https://e-commerce-ten-liard.vercel.app" } }
       )
       .then((data) => {
         return data;
