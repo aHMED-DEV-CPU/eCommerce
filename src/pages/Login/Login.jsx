@@ -14,7 +14,7 @@ export default function Login() {
     password: Yup.string()
       .required()
       .matches(
-        /^[A-Za-z][A-Za-z0-9]{5,8}$/gm,
+        /^[A-Z][A-Za-z0-9]{5,8}$/gm,
         `must be
         <br>
 * Start with uppercase letter .
