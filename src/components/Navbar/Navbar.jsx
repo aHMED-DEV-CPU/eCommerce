@@ -1,8 +1,7 @@
 import { useContext } from "react";
-import style from "./Navbar.module.css";
 import { UserContext } from "../../context/UserContest/UserContext";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import logo from "./../../assets/freshcart-logo.svg";
 import { cartContext } from "../../context/UserContest/CartContext";
 export default function Navbar() {

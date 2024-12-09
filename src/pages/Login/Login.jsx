@@ -1,5 +1,5 @@
 import axios from "axios";
-import style from "./Login.module.css";
+
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
@@ -17,7 +17,7 @@ export default function Login() {
         /^[A-Za-z][A-Za-z0-9]{5,8}$/gm,
         `must be
         <br>
-* Start with a letter (either uppercase or lowercase).
+* Start with uppercase letter .
 <br>
 * Be between 6 and 9 characters in total.
 <br>

@@ -21,7 +21,7 @@ export default function Register() {
         /^[A-Za-z][A-Za-z0-9]{5,8}$/gm,
         `must be
         <br>
-* Start with a letter (either uppercase or lowercase).
+* Start with  uppercase letter .
 <br>
 * Be between 6 and 9 characters in total.
 <br>
