@@ -1,7 +1,8 @@
 import { Outlet } from "react-router-dom";
-import style from "./Layout.module.css";
+
 import Navbar from "../../components/Navbar/Navbar";
 import { useState } from "react";
+import Footer from "../../components/Footer/Footer.jsx";
 
 export default function Layout() {
   const [dark, setDark] = useState(false);
@@ -11,17 +12,22 @@ export default function Layout() {
   return (
     <div className={`${dark && "dark"}`}>
       <div className=" dark:bg-slate-800">
-        <button
-          className="  dark:text-white fixed right-2 bg-green-200  top-[90px] p-3 border  hover:bg-green-500  dark:bg-green-700 dark:border-green-950 rounded-full z-50   "
-          onClick={handleDark}
-        >
-          {" "}
-          {dark ? "light" : "dark"}
-        </button>
+        <label className="inline-flex items-center cursor-pointer top-[90px] fixed right-5">
+          <input
+            type="checkbox"
+            defaultValue
+            className="sr-only peer"
+            checked={dark}
+            onChange={handleDark}
+          />
+          <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600" />
+        </label>
         <Navbar />
+
         <div className=" container mt-[72px] py-5 sheight">
           <Outlet />
         </div>
+        <Footer />
       </div>
     </div>
   );

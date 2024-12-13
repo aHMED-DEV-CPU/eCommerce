@@ -1,5 +1,5 @@
 import axios from "axios";
-import style from "./CategoreySlider.module.css";
+
 import { useEffect, useState } from "react";
 import Slider from "react-slick";
 export default function CategoreySlider() {
@@ -16,13 +16,15 @@ export default function CategoreySlider() {
     getCategory();
   }, []);
   var settings = {
-    dots: true,
+    dots: false,
     infinite: true,
-    speed: 500,
     slidesToShow: 6,
     slidesToScroll: 1,
     arrows: false,
     autoplay: true,
+    speed: 2000,
+    autoplaySpeed: 2000,
+    cssEase: "linear",
     responsive: [
       {
         breakpoint: 1024,
@@ -30,7 +32,6 @@ export default function CategoreySlider() {
           slidesToShow: 4,
           slidesToScroll: 1,
           infinite: true,
-          dots: true,
         },
       },
       {
